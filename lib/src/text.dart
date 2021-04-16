@@ -2,7 +2,6 @@ import 'package:flutter/widgets.dart';
 
 /// text widget that supports highlight
 class S2Text extends StatelessWidget {
-
   /// the text data string
   final String text;
 
@@ -34,7 +33,9 @@ class S2Text extends StatelessWidget {
       return Text(text, style: style);
     }
 
-    final Pattern pattern = RegExp(highlight, caseSensitive: caseSensitive);
+    var highlightEscaped = RegExp.escape(highlight);
+
+    final Pattern pattern = RegExp(highlightEscaped, caseSensitive: caseSensitive);
     int start = 0;
     int indexOfHighlight;
     List<TextSpan> spans = [];

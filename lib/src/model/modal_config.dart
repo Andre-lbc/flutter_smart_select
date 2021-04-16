@@ -6,14 +6,17 @@ import './modal_theme.dart';
 enum S2ModalType {
   /// open in full page
   fullPage,
+
   /// open in popup dialog
   popupDialog,
+
   /// open in sliding bottom sheet
   bottomSheet,
 }
 
 /// Modal configuration
 class S2ModalConfig {
+  final double windowTopOffset;
 
   /// Modal type to display choices
   final S2ModalType type;
@@ -76,6 +79,7 @@ class S2ModalConfig {
   /// Create modal configuration
   const S2ModalConfig({
     this.type = S2ModalType.fullPage,
+    this.windowTopOffset,
     this.title,
     this.useHeader = true,
     this.useConfirm = false,
@@ -93,16 +97,15 @@ class S2ModalConfig {
     this.barrierColor,
     this.style = const S2ModalStyle(),
     this.headerStyle = const S2ModalHeaderStyle(),
-  }) :
-    assert(useHeader != null),
-    assert(useConfirm != null),
-    assert(useFilter != null),
-    assert(filterAuto != null),
-    assert(enableDrag != null),
-    assert(barrierDismissible != null),
-    assert(confirmBrightness != null),
-    assert(style != null),
-    assert(headerStyle != null);
+  })  : assert(useHeader != null),
+        assert(useConfirm != null),
+        assert(useFilter != null),
+        assert(filterAuto != null),
+        assert(enableDrag != null),
+        assert(barrierDismissible != null),
+        assert(confirmBrightness != null),
+        assert(style != null),
+        assert(headerStyle != null);
 
   /// whether the modal is full page or not
   bool get isFullPage {
@@ -113,6 +116,7 @@ class S2ModalConfig {
   /// the given fields replaced with the new values.
   S2ModalConfig copyWith({
     S2ModalType type,
+    double windowTopOffset,
     String title,
     bool useHeader,
     bool useConfirm,
@@ -133,6 +137,7 @@ class S2ModalConfig {
   }) {
     return S2ModalConfig(
       type: type ?? this.type,
+      windowTopOffset: windowTopOffset ?? this.windowTopOffset,
       title: title ?? this.title,
       useHeader: useHeader ?? this.useHeader,
       useConfirm: useConfirm ?? this.useConfirm,
@@ -161,6 +166,7 @@ class S2ModalConfig {
 
     return copyWith(
       type: other.type,
+      windowTopOffset: other.windowTopOffset,
       title: other.title,
       useHeader: other.useHeader,
       useConfirm: other.useConfirm,
