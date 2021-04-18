@@ -9,7 +9,6 @@ import 'text.dart';
 
 /// grouped choices list widget
 class S2ChoicesGrouped<T> extends StatelessWidget {
-
   /// list of string of group name
   final List<String> groupKeys;
 
@@ -57,8 +56,8 @@ class S2ChoicesGrouped<T> extends StatelessWidget {
                 count: groupItems.length,
                 style: config.headerStyle,
               );
-              final Widget groupHeader = builder.choiceHeader?.call(context, group, query)
-                ?? S2ChoicesGroupedHeader(
+              final Widget groupHeader = builder.choiceHeader?.call(context, group, query) ??
+                  S2ChoicesGroupedHeader(
                     group: group,
                     query: query,
                   );
@@ -68,14 +67,14 @@ class S2ChoicesGrouped<T> extends StatelessWidget {
                 items: groupItems,
                 itemBuilder: itemBuilder,
               );
-              return builder.choiceGroup?.call(context, groupHeader, groupChoices)
-                ?? Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    groupHeader,
-                    groupChoices,
-                  ],
-                );
+              return builder.choiceGroup?.call(context, groupHeader, groupChoices) ??
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      groupHeader,
+                      groupChoices,
+                    ],
+                  );
             },
           ),
         ),
@@ -91,7 +90,6 @@ class S2ChoicesGrouped<T> extends StatelessWidget {
 
 /// choice group header widget
 class S2ChoicesGroupedHeader extends StatelessWidget {
-
   /// choices group data
   final S2ChoiceGroup group;
 
@@ -112,21 +110,25 @@ class S2ChoicesGroupedHeader extends StatelessWidget {
       height: group.style.height,
       color: group.style.backgroundColor,
       padding: group.style.padding,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          S2Text(
-            text: group.name,
-            highlight: query,
-            style: textStyle.merge(group.style.textStyle),
-            highlightColor: group.style.highlightColor ?? Color(0xFFFFF176),
-          ),
-          Text(
-            group.count.toString(),
-            style: textStyle.merge(group.style.textStyle),
-          ),
-        ],
+      child: SafeArea(
+        bottom: false,
+        top: false,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            S2Text(
+              text: group.name,
+              highlight: query,
+              style: textStyle.merge(group.style.textStyle),
+              highlightColor: group.style.highlightColor ?? Color(0xFFFFF176),
+            ),
+            Text(
+              group.count.toString(),
+              style: textStyle.merge(group.style.textStyle),
+            ),
+          ],
+        ),
       ),
     );
   }

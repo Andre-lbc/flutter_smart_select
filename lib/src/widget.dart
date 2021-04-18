@@ -678,15 +678,14 @@ abstract class S2State<T> extends State<SmartSelect<T>> {
   /// get default modal widget
   Widget get defaultModal {
     return WillPopScope(
-      onWillPop: () async => changes.valid,
-      child: modalConfig.isFullPage == true
-          ? Scaffold(
-              backgroundColor: modalConfig.style.backgroundColor,
-              appBar: PreferredSize(child: modalHeader, preferredSize: Size.fromHeight(kToolbarHeight)),
-              body: modalBody,
-            )
-          : SafeArea(child: modalBody),
-    );
+        onWillPop: () async => changes.valid,
+        child: modalConfig.isFullPage == true
+            ? Scaffold(
+                backgroundColor: modalConfig.style.backgroundColor,
+                appBar: PreferredSize(child: modalHeader, preferredSize: Size.fromHeight(kToolbarHeight)),
+                body: modalBody,
+              )
+            : modalBody);
   }
 
   /// get custom modal
